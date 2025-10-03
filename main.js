@@ -3,7 +3,6 @@ import fs from "node:fs";
 import http from "node:http";
 import https from "node:https";
 import { scheduler } from "node:timers/promises";
-import tls from "node:tls";
 import { XMLParser } from "fast-xml-parser";
 
 import config from "./config.js";
@@ -11,7 +10,7 @@ import config from "./config.js";
 {
 	let masked = structuredClone(config);
 	masked.influx_token = "*****"
-	console.log("Starting itron2mqtt with config: ", masked);
+	console.log("Starting itron adapter with config: ", masked);
 }
 
 const request = async (mode, url, options, body = null) => {

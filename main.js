@@ -1,5 +1,6 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
+import http from "node:http";
 import https from "node:https";
 import { scheduler } from "node:timers/promises";
 import tls from "node:tls";
@@ -7,11 +8,15 @@ import { XMLParser } from "fast-xml-parser";
 
 import config from "./config.js";
 
-console.log("Starting itron2mqtt with config: ", config);
+{
+	let masked = structuredClone(config);
+	masked.influx_token = "*****"
+	console.log("Starting itron2mqtt with config: ", masked);
+}
 
-const request = async (url, options, body = null) => {
+const request = async (mode, url, options, body = null) => {
 	return new Promise((resolve, reject) => {
-		const req = https.request(url, options, resp => {
+		const req = mode.request(url, options, resp => {
 			const bin_data = [];
 			resp.on("data", chunk => bin_data.push(chunk));
 			resp.on("end", () => {
@@ -41,17 +46,20 @@ const options = {
 
 const itron_url = `https://${config.itron_addr}:${config.itron_port}`;
 const xml = new XMLParser();
-const getReading = async path => request(`${itron_url}/${path}`, options)
+const getReading = async path => request(https, `${itron_url}/${path}`, options)
 	.then(data => xml.parse(data).Reading)
 
-const influx_url = `https://${config.influx_addr}:${config.influx_port}`;
-const influx_write_url = `${influx_url}/api/v3/write_lp?precision=s`;
+const influx_url = `http://${config.influx_addr}:${config.influx_port}`;
+const influx_write_url = `${influx_url}/api/v3/write_lp?db=metrics&precision=second`;
 const postMetric = async lines => {
 	let options = {
 		method: "POST",
-		headers: { "Content-Length": Buffer.byteLength(lines) }
+		headers: {
+			"Authorization": `Bearer ${config.influx_token}`,
+			"Content-Length": Buffer.byteLength(lines),
+		}
 	};
-	return request(influx_write_url, options, lines);
+	return request(http, influx_write_url, options, lines);
 }
 
 function* iterInterval(interval_ms) {
@@ -78,7 +86,7 @@ do {
 		};
 		console.log(data);
 
-		// postMetric(`itron power_w=${data.power_w}i,energy_wh:${data.energy_wh}i ${data.utc_sec}`);
+		postMetric(`itron power_w=${data.power_w}i,energy_wh=${data.energy_wh}i ${data.utc_sec}`);
 	} catch (err) {
 		console.error(err);
 	}

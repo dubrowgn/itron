@@ -70,7 +70,9 @@ function* iterInterval(interval_ms) {
 	}
 }
 
-let interval = iterInterval(1000);
+// meter updates every 1s, so use 500ms (HZ/2) as polling interval
+let interval = iterInterval(500);
+let meter_ts = 0;
 do {
 	try {
 		let [power, energy_produced, energy_consumed] = await Promise.all([
@@ -78,14 +80,18 @@ do {
 			getReading("upt/1/mr/2/rs/1/r/1"),
 			getReading("upt/1/mr/3/rs/1/r/1"),
 		]);
-		let data = {
-			utc_sec: power.timePeriod.start + power.timePeriod.duration,
-			power_w: power.value,
-			energy_wh: energy_consumed.value - energy_produced.value,
-		};
-		console.log(data);
+		let utc_sec = power.timePeriod.start + power.timePeriod.duration;
+		let power_w = power.value;
+		let energy_wh = energy_consumed.value - energy_produced.value;
 
-		postMetric(`itron power_w=${data.power_w}i,energy_wh=${data.energy_wh}i ${data.utc_sec}`);
+		if (utc_sec <= meter_ts)
+			continue;
+		meter_ts = utc_sec;
+
+		let line = `itron power_w=${power_w}i,energy_wh=${energy_wh}i ${utc_sec}`;
+		console.log(line);
+		// post async
+		postMetric(line);
 	} catch (err) {
 		console.error(err);
 	}

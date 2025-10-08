@@ -72,8 +72,8 @@ function* iterInterval(interval_ms) {
 	}
 }
 
-// meter updates every 1s, so use 500ms (HZ/2) as polling interval
-let interval = iterInterval(500);
+// meter updates every 1s
+let interval = iterInterval(900);
 let meter_ts = 0;
 do {
 	try {

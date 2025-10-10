@@ -1,0 +1,128 @@
+<MeterReadingList xmlns="urn:ieee:std:2030.5:ns" href="/upt/1/mr" subscribable="0" all="20" results="20">
+    <MeterReading href="/upt/1/mr/20">
+        <mRID>BBBB14000000000000000000000004D1</mRID>
+        <description>Power Factor PhaseC</description>
+        <ReadingLink href="/upt/1/mr/20/r"/>
+        <ReadingTypeLink href="/rt/20"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/19">
+        <mRID>BBBB13000000000000000000000004D1</mRID>
+        <description>Power Factor PhaseB</description>
+        <ReadingLink href="/upt/1/mr/19/r"/>
+        <ReadingTypeLink href="/rt/19"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/18">
+        <mRID>BBBB12000000000000000000000004D1</mRID>
+        <description>Power Factor PhaseA</description>
+        <ReadingLink href="/upt/1/mr/18/r"/>
+        <ReadingTypeLink href="/rt/18"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/17">
+        <mRID>BBBB11000000000000000000000004D1</mRID>
+        <description>Power Factor</description>
+        <ReadingLink href="/upt/1/mr/17/r"/>
+        <ReadingTypeLink href="/rt/17"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/16">
+        <mRID>BBBB10000000000000000000000004D1</mRID>
+        <description>Max Demand Delivered</description>
+        <ReadingLink href="/upt/1/mr/16/r"/>
+        <ReadingTypeLink href="/rt/16"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/15">
+        <mRID>BBBB0F000000000000000000000004D1</mRID>
+        <description>Max Demand Received</description>
+        <ReadingLink href="/upt/1/mr/15/r"/>
+        <ReadingTypeLink href="/rt/15"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/14">
+        <mRID>BBBB0E000000000000000000000004D1</mRID>
+        <description>VARh Delivered (Interval)</description>
+        <ReadingSetListLink href="/upt/1/mr/14/rs" all="0"/>
+        <ReadingTypeLink href="/rt/14"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/13">
+        <mRID>BBBB0D000000000000000000000004D1</mRID>
+        <description>VARh Received (Interval)</description>
+        <ReadingSetListLink href="/upt/1/mr/13/rs" all="1"/>
+        <ReadingTypeLink href="/rt/13"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/12">
+        <mRID>BBBB0C000000000000000000000004D1</mRID>
+        <description>VAh Delivered (Interval)</description>
+        <ReadingSetListLink href="/upt/1/mr/12/rs" all="0"/>
+        <ReadingTypeLink href="/rt/12"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/11">
+        <mRID>BBBB0B000000000000000000000004D1</mRID>
+        <description>VAh Received (Interval)</description>
+        <ReadingSetListLink href="/upt/1/mr/11/rs" all="0"/>
+        <ReadingTypeLink href="/rt/11"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/10">
+        <mRID>BBBB0A000000000000000000000004D1</mRID>
+        <description>WH Delivered (Interval)</description>
+        <ReadingSetListLink href="/upt/1/mr/10/rs" all="1"/>
+        <ReadingTypeLink href="/rt/10"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/9">
+        <mRID>BBBB09000000000000000000000004D1</mRID>
+        <description>WH Received (Interval)</description>
+        <ReadingSetListLink href="/upt/1/mr/9/rs" all="1"/>
+        <ReadingTypeLink href="/rt/9"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/8">
+        <mRID>BBBB08000000000000000000000004D1</mRID>
+        <description>WH Net (Interval)</description>
+        <ReadingSetListLink href="/upt/1/mr/8/rs" all="0"/>
+        <ReadingTypeLink href="/rt/8"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/7">
+        <mRID>BBBB07000000000000000000000004D1</mRID>
+        <description>VARh Delivered</description>
+        <ReadingLink href="/upt/1/mr/7/r"/>
+        <ReadingSetListLink href="/upt/1/mr/7/rs" all="1"/>
+        <ReadingTypeLink href="/rt/7"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/6">
+        <mRID>BBBB06000000000000000000000004D1</mRID>
+        <description>VARh Received</description>
+        <ReadingLink href="/upt/1/mr/6/r"/>
+        <ReadingSetListLink href="/upt/1/mr/6/rs" all="1"/>
+        <ReadingTypeLink href="/rt/6"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/5">
+        <mRID>BBBB05000000000000000000000004D1</mRID>
+        <description>VAh Delivered</description>
+        <ReadingLink href="/upt/1/mr/5/r"/>
+        <ReadingSetListLink href="/upt/1/mr/5/rs" all="1"/>
+        <ReadingTypeLink href="/rt/5"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/4">
+        <mRID>BBBB04000000000000000000000004D1</mRID>
+        <description>VAh Received</description>
+        <ReadingLink href="/upt/1/mr/4/r"/>
+        <ReadingSetListLink href="/upt/1/mr/4/rs" all="1"/>
+        <ReadingTypeLink href="/rt/4"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/3">
+        <mRID>BBBB03000000000000000000000004D1</mRID>
+        <description>Current Summation Delivered</description>
+        <ReadingLink href="/upt/1/mr/3/r"/>
+        <ReadingSetListLink href="/upt/1/mr/3/rs" all="1"/>
+        <ReadingTypeLink href="/rt/3"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/2">
+        <mRID>BBBB02000000000000000000000004D1</mRID>
+        <description>Current Summation Received</description>
+        <ReadingLink href="/upt/1/mr/2/r"/>
+        <ReadingSetListLink href="/upt/1/mr/2/rs" all="1"/>
+        <ReadingTypeLink href="/rt/2"/>
+    </MeterReading>
+    <MeterReading href="/upt/1/mr/1">
+        <mRID>BBBB01000000000000000000000004D1</mRID>
+        <description>Instantaneous Demand</description>
+        <ReadingLink href="/upt/1/mr/1/r"/>
+        <ReadingTypeLink href="/rt/1"/>
+    </MeterReading>
+</MeterReadingList>

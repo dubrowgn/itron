@@ -4,6 +4,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import http from "node:http";
 import https from "node:https";
+import postgres from "postgres";
 import { scheduler } from "node:timers/promises";
 import { XMLParser } from "fast-xml-parser";
 
@@ -11,7 +12,7 @@ import config from "./config.js";
 
 {
 	let masked = structuredClone(config);
-	masked.influx_token = "*****"
+	masked.pg_pass = "*****";
 	console.log("Starting itron adapter with config: ", masked);
 }
 
@@ -50,17 +51,14 @@ const xml = new XMLParser();
 const getReading = async path => request(https, `${itron_url}/${path}`, options)
 	.then(data => xml.parse(data).Reading)
 
-const influx_url = `http://${config.influx_addr}:${config.influx_port}`;
-const influx_write_url = `${influx_url}/api/v3/write_lp?db=metrics&precision=second`;
-const postMetric = async lines => {
-	let options = {
-		method: "POST",
-		headers: {
-			"Authorization": `Bearer ${config.influx_token}`,
-			"Content-Length": Buffer.byteLength(lines),
-		}
-	};
-	return request(http, influx_write_url, options, lines);
+let sql = postgres({
+	database: "postgres",
+	host: config.pg_host,
+	username: config.pg_user,
+	password: config.pg_pass,
+});
+function postMetrics(metrics) {
+	return sql`insert into itron ${ sql(metrics) }`;
 }
 
 function* iterInterval(interval_ms) {
@@ -90,11 +88,18 @@ do {
 			continue;
 		meter_ts = utc_sec;
 
-		let line = `itron power_w=${power_w}i,energy_wh=${energy_wh}i ${utc_sec}`;
-		console.log(line);
+		let metric = {
+			energy_wh,
+			power_w,
+			time: new Date(1000 * utc_sec),
+		};
+		console.log(JSON.stringify(metric));
 		// post async
-		postMetric(line);
+		postMetrics([metric])
+			.catch(console.error);
 	} catch (err) {
 		console.error(err);
 	}
 } while (await interval.next().value)
+
+await sql.end();

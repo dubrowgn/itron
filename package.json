@@ -6,6 +6,7 @@
   "type": "module",
   "main": "main.js",
   "dependencies": {
-    "fast-xml-parser": "^5.2.5"
+    "fast-xml-parser": "^5.2.5",
+    "postgres": "^3.4.7"
   }
 }

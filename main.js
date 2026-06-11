@@ -70,11 +70,19 @@ function* iterInterval(interval_ms) {
 	}
 }
 
+function watchdogBite() {
+	console.error('watchdog bite; exiting...');
+	process.exit(1);
+}
+let watchdog = setTimeout(watchdogBite, config.wd_timeout_ms);
+
 // meter updates every 1s
 let interval = iterInterval(900);
 let meter_ts = 0;
 do {
 	try {
+		watchdog.refresh();
+
 		let [power, energy_produced, energy_consumed] = await Promise.all([
 			getReading("upt/1/mr/1/r"),
 			getReading("upt/1/mr/2/rs/1/r/1"),
